@@ -242,6 +242,10 @@ Non-nil means always go to the next Octave code line after sending."
   "Non-nil means echo input sent to the inferior Octave process."
   :type 'boolean)
 
+(defcustom octave-sync-function-file-names-on-saving t
+  "Non-nil means check whether function & file names match, and prompt if not."
+  :type 'boolean)
+
 
 ;;; SMIE indentation
 
@@ -616,7 +620,9 @@ Key bindings:
   (setq-local add-log-current-defun-function #'octave-add-log-current-defun)
 
   (add-hook 'completion-at-point-functions 'octave-completion-at-point nil t)
-  (add-hook 'before-save-hook 'octave-sync-function-file-names nil t)
+  (add-hook 'before-save-hook
+            #'(lambda () (when octave-sync-function-file-names-on-saving (octave-sync-function-file-names)))
+            nil t)
   (setq-local beginning-of-defun-function 'octave-beginning-of-defun)
   (and octave-font-lock-texinfo-comment (octave-font-lock-texinfo-comment))
   (add-function :before-until (local 'eldoc-documentation-function)

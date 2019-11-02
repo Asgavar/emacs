@@ -165,6 +165,10 @@ Default is 2.
 Extra indentation applied to Octave continuation lines.
 Default is 4.
 
+@item octave-sync-function-file-names-on-saving
+Non-@code{nil} means check whether function & file names match, and prompt if not.
+The default is @code{t}.
+
 @item octave-font-lock-texinfo-comment
 Highlight texinfo comment blocks.  The default value is @code{t}.
 @end vtable
